@@ -1,0 +1,25 @@
+
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.17%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.17%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.17%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.26%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.25%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.23%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.21%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.20%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.21%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.21%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.20%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.20%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.16%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.07%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.08%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.19%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.19%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.19%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.18%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.19%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.19%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.20%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.20%"}
+{"SO":"win32","Arquitetura":"x64","Porcessador":"AMD Ryzen 5 3600 6-Core Processor              ","UsoMmeoria":"47.20%"}
