@@ -1,0 +1,12 @@
+{
+  "name": "aula-26---retornando-arquivos-estaticos-e-html",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

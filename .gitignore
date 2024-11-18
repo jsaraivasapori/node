@@ -1,0 +1,25 @@
+# Ignorar node_modules
+node_modules/
+
+# Ignorar arquivos de log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorar .env files
+.env
+
+# Ignorar arquivos de sistemas operacionais específicos
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de diretórios específicos
+.vscode/
+.idea/
+
+# Ignorar compilados
+dist/
+build/
+
+# Ignorar arquivos temporários do editor
+*.swp
