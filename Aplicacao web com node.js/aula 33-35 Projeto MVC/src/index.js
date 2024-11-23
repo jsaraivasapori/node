@@ -7,7 +7,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 //fim da configuracao do ejs
 
-//configuracao dos arquivos estaticos
+//configuracao para servir os arquivos estaticos na pasta public
 app.use(express.static("public"));
 //fim
 //configuracao do urlencoder

@@ -1,12 +1,27 @@
-let posts = [];
+let posts = [
+  {
+    id: "1",
+    title: "Primeira publicação do João",
+    content: "Estou estudando Node.js e Express. Agora estou aprendendo MVC",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "2",
+    title: "Segunda publicação",
+    content: "Lorem ipsum....",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+];
 
 //Post{id,titulo, conteudo, criatedAt, updatedAt}
 const postModel = {
   getAllPosts() {
-    return post;
+    return posts;
   },
   getPostById(id) {
-    return post.find((post) => post.id === id);
+    return posts.find((post) => post.id === id);
   },
   criatePost(title, content) {
     const post = {
@@ -19,18 +34,12 @@ const postModel = {
     return post;
   },
   savePost(post) {
-    posts.unshift(post);
+    posts.push(post);
   },
 
   updatePost(id, updatedPost) {
-    oldPost = this.getPostById(id);
-    updatedPost = {
-      id: oldPost.id,
-      title: updatedPost.title,
-      content: updatedPost.content,
-      createdAt: oldPost.createdAt,
-      updatedPost: new Date(),
-    };
+    const index = posts.findIndex((post) => post.id === id);
+    posts[index] = { ...posts[index], ...updatedPost, updatedAt: new Date() };
   },
   deletePost(id) {
     posts = posts.filter((post) => post.id !== id);
