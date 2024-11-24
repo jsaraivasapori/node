@@ -1,0 +1,12 @@
+{
+  "name": "aula-36-37-exercicio-2-app-de-tarefas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
