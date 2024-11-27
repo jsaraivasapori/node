@@ -47,6 +47,15 @@ const gameModel = {
     };
     games.push(newGame);
   },
+  addNewGenre(id, newGenre) {
+    const targetGame = this.getGameById(id);
+    if (!targetGame) {
+      return false;
+    } else {
+      targetGame.genres.push(newGenre);
+      return true;
+    }
+  },
 };
 
 module.exports = gameModel;
