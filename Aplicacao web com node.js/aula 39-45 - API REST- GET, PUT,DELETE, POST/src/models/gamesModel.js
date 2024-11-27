@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require("uuid");
-const games = [
+let games = [
   { id: uuidv4(), name: "Legend of Mana", genres: ["action-rpg"], year: 1999 },
   { id: uuidv4(), name: "World of Warcraft", genres: ["mmorpg"], year: 2004 },
   {
@@ -33,7 +33,7 @@ const gameModel = {
     const game = games.find((game) => game.id === id);
 
     if (!game) {
-      return false;
+      return null;
     } else {
       return game;
     }
@@ -67,6 +67,25 @@ const gameModel = {
       targetGame.genres = genres;
 
     return targetGame;
+  },
+  deleteGame(id) {
+    const targetGame = this.getGameById(id);
+    if (!targetGame) {
+      return false;
+    }
+    games = games.filter((game) => game.name !== targetGame.name);
+    console.log(games);
+
+    return true;
+  },
+  deleteGenre(id, genreName) {
+    const targetGame = this.getGameById(id);
+    if (!targetGame) return false;
+
+    targetGame.genres = targetGame.genres.filter(
+      (genre) => genre !== genreName
+    );
+    return true;
   },
 };
 

@@ -58,5 +58,27 @@ module.exports = {
     }
   },
   //DELETE /games/:id
+  deleteGame(req, res) {
+    const { id } = req.params;
+    const deletedGame = gamesModel.deleteGame(id);
+    if (!deletedGame) {
+      res.status(400);
+      res.json({ message: "Game not found to delete" });
+    } else {
+      res.status(204);
+      res.json({ message: "Success" });
+    }
+  },
   // DELETE /games/:id/genres/:name
+  deleteGenre(req, res) {
+    const { id, name } = req.params;
+    const deletedGenre = gamesModel.deleteGenre(id, name);
+    if (!deletedGenre) {
+      res.status(400);
+      res.json({ message: "Game not found to delete" });
+    } else {
+      res.status(204);
+      res.json({ message: "Success" });
+    }
+  },
 };
