@@ -56,6 +56,18 @@ const gameModel = {
       return true;
     }
   },
+  updateGame(id, name, genres, year) {
+    const targetGame = this.getGameById(id);
+    if (!targetGame) {
+      return false;
+    }
+    if (typeof targetGame.name === "string") targetGame.name = name;
+    if (typeof targetGame.year === "number") targetGame.year = year;
+    if (Array.isArray(targetGame.genres) && targetGame.genres !== null)
+      targetGame.genres = genres;
+
+    return targetGame;
+  },
 };
 
 module.exports = gameModel;

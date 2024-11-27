@@ -41,6 +41,22 @@ module.exports = {
     }
   },
   //PUT /games/:id
-
+  updateGame(req, res) {
+    const { id } = req.params;
+    const { name, genres, year } = req.body;
+    const updatedGame = gamesModel.updateGame(id, name, genres, year);
+    if (!updatedGame) {
+      res.status(400);
+      res.json({ message: "Game not found to update" });
+    } else {
+      res.json({
+        id: updatedGame.id,
+        name: updatedGame.name,
+        genres: updatedGame.genres,
+        year: updatedGame.year,
+      });
+    }
+  },
   //DELETE /games/:id
+  // DELETE /games/:id/genres/:name
 };
