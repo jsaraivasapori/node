@@ -1,0 +1,15 @@
+{
+  "name": "aula-54-56---exercicio-4-api-com-rotaa-protegida",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2"
+  }
+}
