@@ -1,12 +1,12 @@
 Crie uma API usando Express que possua um sistema de autenticação usando JWT. Para isso, sua API deverá possuir as seguintes funcionalidades:
 
-Rotas para registro e login, onde o usuário deverá ter os atributos nome, email, senha e papel, que poderá ser “Administrador” ou “Usuário Padrão”.
+Rotas para registro e login, onde o usuário deverá ter os atributos nome, email, senha e papel, que poderá ser “Administrador” ou “Usuário Padrão”. ok
 
-Novos usuários devem sempre ser cadastrados como “Usuários Padrão” e o array de usuários deve ser inicializado com um usuário “Administrador” já cadastrado.
+Novos usuários devem sempre ser cadastrados como “Usuários Padrão” e o array de usuários deve ser inicializado com um usuário “Administrador” já cadastrado. ok
 
-O email dos usuários deverá ser único.
+O email dos usuários deverá ser único. ok
 
-As rotas de registro e login devem ser capazes de lidar com erros comuns, como campos inválidos, credenciais incorretas e email já existente.
+As rotas de registro e login devem ser capazes de lidar com erros comuns, como campos inválidos, credenciais incorretas e email já existente. ok
 
 Deve ser feita a criação, decodificação e validação de um token JWT para autenticação dos usuários.
 
