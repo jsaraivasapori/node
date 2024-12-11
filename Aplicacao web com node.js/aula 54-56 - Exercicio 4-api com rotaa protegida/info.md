@@ -8,10 +8,10 @@ O email dos usuários deverá ser único. ok
 
 As rotas de registro e login devem ser capazes de lidar com erros comuns, como campos inválidos, credenciais incorretas e email já existente. ok
 
-Deve ser feita a criação, decodificação e validação de um token JWT para autenticação dos usuários.
+Deve ser feita a criação, decodificação e validação de um token JWT para autenticação dos usuários. ok
 
 Uma rota que devolve uma mensagem de boas-vindas dinâmica. Caso não haja um usuário autenticado a mensagem o tratará como “Visitante”, caso contrário, o nome do usuário deve ser utilizado.
 
-Rotas para gerenciar todos os usuários, mas que só podem ser acessadas por usuários administradores. Nelas deve ser possível criar outros usuários administradores, assim como ler e excluir qualquer usuário.
+Rotas para gerenciar todos os usuários, mas que só podem ser acessadas por usuários administradores. Nelas deve ser possível criar outros usuários administradores, assim como ler e excluir qualquer usuário. ok
 
 Obs.: Como essa API irá ter uma quantidade um pouco maior de rotas e funcionalidades, tente organizar o projeto de forma mais cuidadosa, utilizando diferentes arquivos e pastas.
