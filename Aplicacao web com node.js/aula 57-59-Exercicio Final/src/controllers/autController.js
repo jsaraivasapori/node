@@ -1,6 +1,6 @@
 const users = require("../models/usersModel.js");
 const jwt = require("jsonwebtoken");
-
+const bcrypte = require("bcrypt");
 module.exports = {
   //POST /auth/register
   register(req, res) {
@@ -23,8 +23,12 @@ module.exports = {
       }
 
       const existingUser = users.getUserByEmail(email);
-
-      if (!existingUser || existingUser.password !== password) {
+      console.log("Senha criptografada com bcrypt:", existingUser.password);
+      const isValidPassword = bcrypte.compareSync(
+        password,
+        existingUser.password
+      );
+      if (!existingUser || !isValidPassword) {
         res.status(401).json({ message: "Credenciais inválidas" });
       }
       const payload = {
