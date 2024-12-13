@@ -1,51 +1,57 @@
-const uuid = require("uuid");
+const { v4: uuidv4 } = require("uuid");
+const HttpError = require("../error/HttpError");
 
 let books = [
-  {
-    id: uuid(),
-    title: "As Duas Torres",
-    author: "Token",
-    quantityAvailable: 2,
-  },
-  {
-    id: uuid(),
-    title: "Sangue dos Elfos",
-    author: "Sapkowski ",
-    quantityAvailable: 1,
-  },
+    {
+        id: uuidv4(),
+        title: "As Duas Torres",
+        author: "Token",
+        quantityAvailable: 2,
+    },
+    {
+        id: uuidv4(),
+        title: "Sangue dos Elfos",
+        author: "Sapkowski ",
+        quantityAvailable: 1,
+    },
 ];
 
 module.exports = {
-  getAllBooks() {
-    return books;
-  },
-  getBooksById(id) {
-    const target = books.find((book) => book.id === id);
-    if (condition) {
-    }
-    return target;
-  },
-  createBook({ tiitle, author, quantityAvailable }) {
-    const newBook = { id: uuid(), tiitle, author, quantityAvailable };
-    books.push(newBook);
-    return newBook;
-  },
-  updateBook(id, data) {
-    const bookIndex = books.findIndex((book) => book.id === id);
-    if (bookIndex === -1) throw new Error("Livro não encontrado");
-    //books[bookIndex] = { ...book[booksIndex, ...data]} //Com o spread operator, você está criando um novo objeto que mescla o antigo com as novas atualizações
+    getAllBooks() {
+        return books;
+    },
+    getBooksById(id) {
+        const target = books.find((book) => book.id === id);
+        return target;
+    },
+    createBook(data) {
+        console.log(data.title);
 
-    // books[bookIndex] = data; aqui eu soibrescrevo todas as propriedades
+        const newBook = {
+            id: uuidv4(),
+            title: data.title,
+            author: data.author,
+            quantityAvailable: data.quantityAvailable,
+        };
+        books.push(newBook);
+        return newBook;
+    },
+    updateBook(id, data) {
+        const bookIndex = books.findIndex((book) => book.id === id);
+        if (bookIndex === -1) throw new HttpError(404, "Livro não encontrado");
+        //books[bookIndex] = { ...book[booksIndex, ...data]} //Com o spread operator, você está criando um novo objeto que mescla o antigo com as novas atualizações
 
-    Object.assign(books[bookIndex], data); // aqui eu troco cada propriedade diferente da original, sem copias
-    return books[bookIndex];
-  },
-  deleteBook(id) {
-    target = this.getBooksById(id);
-    if (!target && Object.keys(target).length === 0)
-      throw new Error("Falha ao deletar");
+        // books[bookIndex] = data; aqui eu soibrescrevo todas as propriedades
 
-    books = books.filter((book) => book.id !== target.id);
-    return target;
-  },
+        Object.assign(books[bookIndex], data); // aqui eu troco cada propriedade diferente da original, sem copias
+        return books[bookIndex];
+    },
+    deleteBook(id) {
+        target = this.getBooksById(id);
+        if (!target && Object.keys(target).length === 0)
+            throw new HttpError(404, "Falha ao deletar");
+
+        books = books.filter((book) => book.id !== target.id);
+        return target;
+    },
 };
