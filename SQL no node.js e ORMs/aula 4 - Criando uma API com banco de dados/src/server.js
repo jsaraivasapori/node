@@ -1,4 +1,5 @@
-const express = require(express);
+const express = require("express");
+const router = require("./router.js");
 
 const app = express();
 
@@ -8,5 +9,5 @@ app.use("/api", router);
 const PORT = 3000;
 
 app.listen(PORT, () =>
-  console.log(`Servidor iniciado em http://localhost:${PORT}`)
+  console.log(`Servidor rodando em http://localhost:${PORT}`)
 );
