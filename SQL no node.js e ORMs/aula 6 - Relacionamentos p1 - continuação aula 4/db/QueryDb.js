@@ -17,5 +17,8 @@ class QueryDb {
       return null;
     }
   }
+  async getClient() {
+    return this.pool.connect();
+  }
 }
 module.exports = new QueryDb(); // ao exportar a instancia de QueryDb, garanto que  todas as consultas estão sendo feitas sobre o mesmo conjunto de conexões do pool

@@ -2,10 +2,10 @@ const QueryDb = require("../../db/QueryDb.js");
 class Order {
   constructor(orderRow, populateCustomer, populateProducts) {
     this.id = orderRow.id;
-    this.customerId = orderRow.customer_id;
+    this.customerId = orderRow.customerId;
     this.total = +orderRow.total;
-    this.createdAt = new Date(orderRow.created_at);
-    this.updatedAt = new Date(orderRow.updated_at);
+    this.createdAt = new Date(orderRow.createdAt);
+    this.updatedAt = new Date(orderRow.updatedAt);
 
     // dessa vez nosso construtor incluirá a possibilidade de
     // popular propriedades com dados das tabelas associadas
@@ -20,37 +20,31 @@ class Order {
   }
 
   static async findAll() {
-    const result = await QueryDb.query(`
+    const query = await QueryDb.query(`
       SELECT 
         orders.*,
-        customers.id  AS customers_id,
-        customers.name AS customers_name,
+        customers.id  AS customer_id,
+        customers.name AS customer_name,
         customers.email AS customer_email,
-        customers.created_at AS customers_created_at,
-        customers.updated_at AS customers_updated_at
+        customers.created_at AS customer_created_at,
+        customers.updated_at AS customer_updated_at
       FROM orders JOIN customers ON customers.id = orders.id;
       `);
-    console.log(result.rows[0]);
-    const toReturn = result.rows.map((row) => {
-      const customerRows = {
-        customerId: row.customer_id,
-        nameCustomer: row.customers_name,
-        emailCustomer: row.customer_emai,
-        created_at: row.customer_created_at,
-        updated_at: row.customer_updated_at,
-      };
 
-      //   id: 3,
-      //   customer_id: 1,
-      //   total: "350.00",
-      //   created_at: "2025-02-01 19:25:23.127616",
-      //   updated_at: "2025-02-01 19:25:23.127616",
-      //   customers_id: 3,
-      //   customers_name: "Ana Pereira",
-      //   customer_email: "ana.pereira@example.com",
-      //   customers_created_at: "2025-02-01 19:00:25.078633",
-      //   customers_updated_at: "2025-02-01 19:00:25.078633",
-      // }
+    // retorno de uma order
+    // {
+    //   id: 3,
+    //   customer_id: 3,
+    //   total: "350.00",
+    //   created_at: "2025-02-01 22:15:52.161058",
+    //   updated_at: "2025-02-01 22:15:52.161058",
+    //   customer_name: "Ana Pereira",
+    //   customer_email: "ana.pereira@example.com",
+    //   customer_created_at: "2025-02-01 22:15:03.081363",
+    //   customer_updated_at: "2025-02-01 22:15:03.081363",
+    // }
+
+    const formattedQuery = result.rows.map((row) => {
       const orderRows = {
         id: row.id,
         customerId: row.customer_id,
@@ -58,10 +52,87 @@ class Order {
         createdAt: row.created_at,
         updatedAt: row.updated_at,
       };
+      const customerRows = {
+        customerId: row.customer_id,
+        nameCustomer: row.customer_name,
+        emailCustomer: row.customer_email,
+        createdAt: row.customer_created_at,
+        updatedAt: row.customer_updated_at,
+      };
+
       return new Order(orderRows, customerRows);
     });
-    console.log(toReturn[0]);
-    return toReturn;
+
+    return formattedQuery;
+  }
+
+  /**
+   *@param {number} customerId
+   * @param {{ id: number, quantity: number }[]} orderProducts
+   */
+  static async create(customerId, orderProducts) {
+    // começamos obtendo os dados de todos os produtos desse pedido
+
+    const storedOrderProducts = await QueryDb.query(
+      `
+      SELECT * FROM products WHERE id = ANY($1::int[]);`,
+      [orderProducts.map((product) => product.id)] // pega somente o id dos produtos vindo de orderProducts
+    );
+
+    console.log("storedOrderProducts:", storedOrderProducts.rows);
+
+    // fazemos a soma do total de cada produto * sua quantidade
+    let orderTotal = 0;
+    const populatedOrderProducts = storedOrderProducts.rows.map((row) => {
+      //para cada linha vinda do banco com os ids dos produtos passados eu faço a soma total
+      const { quantity } = orderProducts.find(
+        (product) => product.id === row.id
+      );
+      orderTotal += +row.price * quantity;
+
+      return { product: row, quantity };
+    });
+    console.log("populatedOrderProducts", populatedOrderProducts);
+
+    // precisamos obter um cliente específico da pool para
+    // executar todas as queries da transaction nele
+
+    const dbClient = await getClient();
+    let response;
+    try {
+      await dbClient.query("BEGIN");
+
+      // inserimos o pedido
+      const orderCreationResult = await dbClient.query(
+        `INSERT INTO orders (customer_id, total) VALUES ($1, $2) RETURNING *;`,
+        [customerId, orderTotal]
+      );
+
+      const order = new Order(
+        orderCreationResult.rows[0],
+        null,
+        populatedOrderProducts
+      );
+
+      // e então salvamos cada produto desse pedido com sua quantidade
+      for (const entry of populatedOrderProducts) {
+        await dbClient.query(
+          `INSERT INTO order_products (order_id, product_id, quantity) VALUES ($1, $2, $3);`,
+          [order.id, entry.product.id, entry.quantity]
+        );
+      }
+
+      // e então fazemos o commit da transaction
+      await dbClient.query("COMMIT");
+      response = order;
+    } catch (error) {
+      await dbClient.query("ROLLBACK");
+      response = { message: `Error while creating order: ${error.message}` };
+    } finally {
+      dbClient.release();
+    }
+
+    return response;
   }
 }
 module.exports = Order;
@@ -109,4 +180,7 @@ module.exports = Order;
   ]
 }
    */
-Order.findAll();
+Order.create(1, [
+  { id: 1, quantity: 2 },
+  { id: 2, quantity: 2 },
+]);
