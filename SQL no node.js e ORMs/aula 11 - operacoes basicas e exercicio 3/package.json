@@ -1,0 +1,12 @@
+{
+  "name": "aula-11---operacoes-basicas-e-exercicio-3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --watch ./src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
