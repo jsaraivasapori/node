@@ -6,12 +6,13 @@ class UserModel {
   }
 
   static async create({ name, email }) {
-    const newUser = prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         name: name,
         email: email,
       },
     });
+
     return newUser;
   }
 
@@ -25,19 +26,19 @@ class UserModel {
     return user;
   }
 
-  static async update(id, params) {
+  static async update(userId, data) {
     const userUpdated = prisma.user.update({
       where: {
-        id: id,
+        userId,
       },
-      data: params,
+      data,
     });
     return userUpdated;
   }
-  static async delete(id) {
+  static async delete(userId) {
     const userDeleted = prisma.user.delete({
       where: {
-        id: id,
+        userId,
       },
     });
     return userDeleted;

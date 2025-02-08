@@ -16,6 +16,7 @@ class UserController {
   async save(req, res) {
     try {
       const body = req.body;
+
       const newUserInserted = await UserModel.create(body);
       res.status(200).json(newUserInserted);
     } catch (error) {
@@ -27,7 +28,6 @@ class UserController {
   async show(req, res) {
     try {
       const id = req.params.id;
-      console.log("id:", id);
 
       const target = await UserModel.findById(id);
       res.status(200).json(target);
