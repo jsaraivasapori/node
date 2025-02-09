@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.use("/api", userRouter);
 app.use("/api", postRouter);
-app.use("/api", searchRouter);
+app.use("/api/posts", searchRouter);
 
 const PORT = 3000;
 
