@@ -1,10 +1,8 @@
 const { Router } = require("express");
-const UserControler = require("./controllers/UserController.js");
-const PostControler = require("./controllers/PostController.js");
-const SearchController = require("./controllers/SearchController.js");
+const PostControler = require("../controllers/PostController.js");
+
 const router = Router();
 
-//Posts
 router.get("/posts", PostControler.index);
 router.get("/posts/:id", PostControler.show);
 router.get("/posts/byUser/:userId", PostControler.list);
