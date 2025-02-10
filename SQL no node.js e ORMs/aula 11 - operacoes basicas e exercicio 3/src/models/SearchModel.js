@@ -1,19 +1,28 @@
 const prisma = require("../dataBase/index.js");
 
 class SearchModel {
-  filter = {};
-
   static async search(title, authorId, published, startDate, endDate) {
-    makeFilter(title, authorId, published, startDate, endDate);
+    console.log(title);
+
+    const filter = SearchModel.makeFilter(
+      title,
+      authorId,
+      published,
+      startDate,
+      endDate
+    );
+
     const posts = await prisma.post.findMany({
       where: filter,
       // Opcionalmente, também podemos ordenar os posts por uma coluna, como a data de criação
       orderBy: { createdAt: "desc" },
     });
+
     return posts;
   }
 
-  async makeFilter() {
+  static makeFilter(title, authorId, published, startDate, endDate) {
+    const filter = {};
     if (title) {
       filter.title = {
         contains: title,
@@ -41,6 +50,7 @@ class SearchModel {
     }
 
     console.log("Filtro:", filter);
+    return filter;
   }
 }
 
