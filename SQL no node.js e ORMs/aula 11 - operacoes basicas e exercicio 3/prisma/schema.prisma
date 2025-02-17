@@ -22,6 +22,7 @@ model Post {
   updatedAt DateTime @default(now())
   User      User     @relation(fields: [userId], references: [id])
   userId    String   @db.Uuid
+  tags      Tag[]    @relation("PostTags")
 }
 
 model User {
@@ -32,3 +33,11 @@ model User {
   updatedAt DateTime @default(now())
   posts     Post[]
 }
+
+model Tag {
+  id    String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name  String @db.VarChar(255)
+  posts Post[] @relation("PostTags")
+}
+
+// tag e post tem relacao n:n
