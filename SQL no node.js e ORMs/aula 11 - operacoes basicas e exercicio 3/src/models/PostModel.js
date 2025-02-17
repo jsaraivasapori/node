@@ -1,11 +1,13 @@
 const prisma = require("../dataBase/index.js");
 
 class PostModel {
-  static async findAll() {
-    const posts = await prisma.post.findMany();
-    console.log(posts);
-
-    return posts;
+  static async findAll(skip, take) {
+    const postsPaginated = await prisma.post.findMany({
+      skip,
+      take: +take,
+      orderBy: { createdAt: "desc" },
+    });
+    return postsPaginated;
   }
 
   static async create({ userId, title, content, published }) {

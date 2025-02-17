@@ -3,11 +3,23 @@ const PostModel = require("../models/PostModel.js");
 class PostController {
   async index(req, res) {
     try {
-      const posts = await PostModel.findAll();
-      res.status(200).json(posts);
+      const { page, pageSize } = req.query;
+      console.log("page:", page, "pageSize", pageSize);
+      if (!page || !pageSize) {
+        return res.status(400).json({
+          message:
+            "Pesquisa por paginacao. informe page e pageSize nos cabecalhos da requisicao",
+        });
+      }
+
+      const skip = (page - 1) * pageSize;
+      const take = pageSize;
+
+      const posts = await PostModel.findAll(skip, take);
+      return res.status(200).json(posts);
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: "Internal erro" });
+      return res.status(500).json({ message: error.message });
     }
   }
   async show(req, res) {
