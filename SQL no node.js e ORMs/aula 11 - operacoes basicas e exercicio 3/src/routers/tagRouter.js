@@ -5,8 +5,8 @@ const route = Router();
 
 route.get("/tags", TagController.index);
 route.get("/tags/:id", TagController.show);
-router.post("/tags", TagController.save);
-router.put("/tags/:tagId", TagController.update);
-router.delete("/tags/:id", TagController.delete);
+route.post("/tags", TagController.save);
+route.put("/tags/:tagId", TagController.update);
+route.delete("/tags/:id", TagController.delete);
 
 module.exports = route;
