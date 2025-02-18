@@ -1,12 +1,12 @@
 const { Router } = require("express");
-const TagController = require("../controllers/UserController.js");
+const TagController = require("../controllers/TagController.js");
 
 const route = Router();
 
 route.get("/tags", TagController.index);
-route.get("/tags/:id", TagController.show);
+route.get("/tags/tagId", TagController.show);
 route.post("/tags", TagController.save);
 route.put("/tags/:tagId", TagController.update);
-route.delete("/tags/:id", TagController.delete);
+route.delete("/tags/:tagId", TagController.delete);
 
 module.exports = route;
