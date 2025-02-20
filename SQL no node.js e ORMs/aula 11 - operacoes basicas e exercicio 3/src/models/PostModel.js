@@ -6,11 +6,12 @@ class PostModel {
       skip,
       take: +take,
       orderBy: { createdAt: "desc" },
+      include: { tags: true },
     });
     return postsPaginated;
   }
 
-  static async create({ userId, title, content, published }) {
+  static async create({ userId, title, content, published, tags }) {
     console.log("userId", userId);
 
     const newPost = await prisma.post.create({
@@ -19,9 +20,9 @@ class PostModel {
         title,
         content,
         published,
+        tags: { connect: tags },
       },
     });
-    console.log("no model:", newPost);
 
     return newPost;
   }
@@ -31,6 +32,7 @@ class PostModel {
       where: {
         id: postId,
       },
+      include: { tags: true },
     });
     if (!targetPost) throw new Error({ message: "Not found" });
     return targetPost;
@@ -40,7 +42,7 @@ class PostModel {
       where: {
         userId,
       },
-      include: { User: true },
+      include: [{ User: true }, { tags: true }],
     });
     return targetPostArray;
   }
@@ -55,7 +57,13 @@ class PostModel {
       where: {
         id: postToUpdate.id,
       },
-      data,
+      data: {
+        ...data,
+        tags: {
+          set: data.tags,
+        },
+      },
+      include: { tags: true },
     });
     return updatedPost;
   }
