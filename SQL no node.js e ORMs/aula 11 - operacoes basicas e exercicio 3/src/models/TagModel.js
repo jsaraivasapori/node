@@ -12,6 +12,7 @@ class TagModel {
         id: tagId,
       },
     });
+    if (!tagId) return null;
     return target;
   }
 
@@ -25,7 +26,18 @@ class TagModel {
     return newTag;
   }
 
-  static async update(tagId, newTagInfo) {}
+  static async update(tagId, newTagInfo) {
+    const toUpdate = await TagModel.findById(tagId);
+    if (!toUpdate) return null;
+
+    const updatedTag = prisma.tag.update({
+      where: {
+        id: tagId,
+      },
+      data: newTagInfo,
+    });
+    return updatedTag;
+  }
 
   static async delete(tagId) {
     const toDelete = await TagModel.findById(tagId);
