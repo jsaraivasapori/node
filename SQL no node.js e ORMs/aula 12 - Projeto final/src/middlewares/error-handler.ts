@@ -1,5 +1,5 @@
 import { ErrorRequestHandler } from "express";
-import { HttpError } from "../errors/HttpErros";
+import { HttpError } from "../errors/HttpsError";
 
 export const errorHandlerMiddleware: ErrorRequestHandler = (
   error,
@@ -7,6 +7,7 @@ export const errorHandlerMiddleware: ErrorRequestHandler = (
   res,
   next
 ) => {
+  console.log("Descrição do erro ..: ", error);
   if (error instanceof HttpError) {
     res.status(error.status).json({ message: error.message });
   } else if (error instanceof Error) {
