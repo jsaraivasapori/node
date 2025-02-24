@@ -38,7 +38,9 @@ export class LeadController {
   async update(req: Request, res: Response, next: NextFunction) {
     try {
       const id = Number(req.params.id);
-      const newData = CreateLeadRequestSchema.parse(req.body);
+      const newData = CreateLeadRequestSchema.parse(
+        CreateLeadRequestSchema.parse(req.body)
+      );
       const updatedLead = await LeadModel.update(id, newData);
       console.log(typeof updatedLead);
       res.json(updatedLead);
@@ -53,11 +55,6 @@ export class LeadController {
       const leadToDelete = await LeadModel.delete(id);
       res.json(leadToDelete);
     } catch (error) {
-      if (error instanceof Prisma.PrismaClientKnownRequestError) {
-        if (error.code === "P2025") {
-          return res.status(404).json({ error: "Lead não encontrado" }); // 404 Not Found
-        }
-      }
       next(error);
     }
   }

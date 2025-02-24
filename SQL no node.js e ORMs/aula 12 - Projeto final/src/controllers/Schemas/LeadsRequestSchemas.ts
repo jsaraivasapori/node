@@ -16,3 +16,10 @@ export const CreateLeadRequestSchema = z.object({
     ])
     .optional(),
 });
+
+export const UpdateLeadRequestSchema = z.object({
+  name: z.string().optional(),
+  email: z.string().optional(),
+  phone: z.string().optional(),
+  status: z.string().optional(),
+});
